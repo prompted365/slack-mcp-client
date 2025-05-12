@@ -10,7 +10,6 @@ RUN go mod download
 
 # Copy source code
 COPY . .
-COPY mcp-servers.json /root/mcp-servers.json
 
 # Build the application
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o slack-mcp-client ./cmd/slack-mcp-client
@@ -24,6 +23,6 @@ WORKDIR /root/
 
 # Copy the binary from builder
 COPY --from=builder /app/slack-mcp-client .
-
+COPY --from=builder /app/mcp-servers.json .
 # Command to run
 ENTRYPOINT ["./slack-mcp-client"] 
