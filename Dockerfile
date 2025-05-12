@@ -23,6 +23,6 @@ WORKDIR /root/
 
 # Copy the binary from builder
 COPY --from=builder /app/slack-mcp-client .
-
+COPY --from=builder /app/mcp-server.json .
 # Command to run
 ENTRYPOINT ["./slack-mcp-client"] 
